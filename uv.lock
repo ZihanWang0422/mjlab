@@ -1166,6 +1166,7 @@ cu128 = [
 [package.dev-dependencies]
 dev = [
     { name = "ipdb" },
+    { name = "mjlab" },
     { name = "pre-commit" },
     { name = "pyright" },
     { name = "pytest" },
@@ -1200,6 +1201,7 @@ provides-extras = ["cu128"]
 [package.metadata.requires-dev]
 dev = [
     { name = "ipdb", specifier = ">=0.13.13" },
+    { name = "mjlab", editable = "." },
     { name = "pre-commit", specifier = ">=4.3.0" },
     { name = "pyright", specifier = ">=1.1.407" },
     { name = "pytest", specifier = ">=8.4.2" },

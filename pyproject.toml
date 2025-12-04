@@ -63,6 +63,7 @@ viz-nan = "mjlab.scripts.nan_viz:main"
 [dependency-groups]
 dev = [
   "ipdb>=0.13.13",
+  "mjlab",
   "pre-commit>=4.3.0",
   "pyright>=1.1.407",
   "pytest>=8.4.2",
@@ -107,6 +108,12 @@ mujoco-warp = { git = "https://github.com/google-deepmind/mujoco_warp", rev = "4
 warp-lang = { index = "nvidia", marker = "sys_platform != 'darwin'" }
 mujoco = { index = "mujoco" }
 torch = { index = "pytorch-cu128", extra = "cu128", marker = "sys_platform != 'darwin'" }
+mjlab = { workspace = true, editable = true }
+
+[tool.uv.workspace]
+members = [
+    ".",
+]
 
 [tool.ruff]
 src = ["src"]  # Helpful for recognizing first-party imports.
