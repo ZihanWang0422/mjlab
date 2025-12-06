@@ -75,11 +75,27 @@ For full setup instructions, see the [Installation Guide](docs/installation_guid
 Train a Unitree G1 humanoid to follow velocity commands on flat terrain:
 
 ```bash
+
+#从本地checkpoint继续训练
+uv run train Mjlab-Velocity-Rough-Unitree-G1 \
+  --agent.resume True \
+  --agent.load-run "2025-12-04_17-31-12" \
+  --agent.load-checkpoint "model_1750.pt" \
+  --gpu-ids 0 \
+  --env.scene.num-envs 4096
+
+#从wandb的checkpoint继续训练
 uv run train Mjlab-Velocity-Flat-Unitree-G1 \
   --agent.resume True \
   --wandb-run-path 1155252197-the-chinese-university-of-hong-kong/mjlab/run-id \
   --gpu-ids 0 \
   --env.scene.num-envs 4096
+```
+
+PS:如果在大陆，在运行的脚本加入下述代理配置
+```python
+os.environ["HTTPS_PROXY"] = "http://127.0.0.1:7890"
+os.environ["HTTP_PROXY"] = "http://127.0.0.1:7890"
 ```
 
 **Multi-GPU Training:** Scale to multiple GPUs using `--gpu-ids`:
@@ -95,19 +111,21 @@ See the [Distributed Training guide](docs/api/distributed_training.md) for detai
 Evaluate a policy while training (fetches latest checkpoint from Weights & Biases):
 
 ```bash
+#从本地checkpoint play
 uv run play Mjlab-Velocity-Flat-Unitree-G1 \
   --checkpoint-file logs/rsl_rl/g1_velocity/2025-12-02_local_resume/model_2600.pt \
   --num-envs 1 \
   --device cuda:0 \
   --viewer native
 
-
+#从wandb的checkpoint play
 uv run play Mjlab-Velocity-Flat-Unitree-G1 \
   --wandb-run-path 1155252197-the-chinese-university-of-hong-kong/mjlab/run-id \
   --num-envs 1 \
   --device cuda:0 \
   --viewer native
-
+  
+# Mjlab-Velocity-Flat-Unitree-G1 这里修改环境(rough/flat...)
 # viewer viser 是使用网页仿真器
 
 ```
